@@ -1,4 +1,5 @@
 # Welcome to Sadhyaware AI/ML Services
+Division of Obiz Consulting Ltd
 
 Welcome to **Sadhyaware AI/ML Services**! We specialize in providing cutting-edge artificial intelligence and machine learning solutions to help businesses harness the power of data and drive innovation.
 
@@ -57,7 +58,6 @@ Integrate AI/ML capabilities into your existing systems and workflows to enhance
 Interested in our services or want to learn more about our projects? Get in touch with us!
 
 - **Email**: [enterprisesolutions@obizconsulting.com](mailto:enterprisesolutions@obizconsulting.com)
-- **Address**: 15 Avonlea Road, Sale, Cheshire, M33 4HY, UK
 
 Follow us on social media:
 
