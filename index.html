@@ -423,11 +423,14 @@
                                 <button id="scroll-next" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] px-4 py-3 text-[var(--color-brand-accent)] hover:bg-[var(--color-brand-border)] transition shadow-lg shadow-black/20 pointer-events-auto" aria-label="Scroll foundation next">
                                     &gt;
                                 </button>
-                                <div class="absolute bottom-[9%] left-1/2 -translate-x-1/2 w-[60%] max-w-[440px] bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] rounded-3xl shadow-xl px-3 py-3 pointer-events-auto">
-                                    <div id="foundation-scroller" class="flex space-x-4 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth text-center px-2">
-                                        <button type="button" data-social="linkedin" data-service-name="Sadhyaware Overview" class="foundation-trigger snap-center shrink-0 min-w-[220px] max-w-[240px] text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--color-brand-accent)] px-3 py-1 bg-slate-900/60 rounded border border-slate-800">[ S1: SADHYAWARE ]</button>
-                                        <button type="button" data-social="twitter" data-service-name="Strategic AI Path" class="foundation-trigger snap-center shrink-0 min-w-[220px] max-w-[240px] text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--color-brand-gold)] px-3 py-1 bg-slate-900/60 rounded border border-slate-800">[ S2: SADHYASOFT ]</button>
-                                        <button type="button" data-social="youtube" data-service-name="Systems Architecture" class="foundation-trigger snap-center shrink-0 min-w-[220px] max-w-[240px] text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-400 px-3 py-1 bg-slate-900/60 rounded border border-slate-800">[ S3: SADHYATECH ]</button>
+                                <div class="absolute bottom-[9%] left-1/2 -translate-x-1/2 w-[72%] max-w-[500px] bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] rounded-3xl shadow-xl px-4 py-4 pointer-events-auto">
+                                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                                        <div class="min-w-0">
+                                            <p class="text-[var(--color-brand-accent)] text-[10px] uppercase tracking-[0.35em] font-semibold">Enquiry Category</p>
+                                            <p id="service-current-label" class="mt-3 text-sm font-bold text-[var(--color-brand-text-light)]">Tech Innovation Labs</p>
+                                            <p id="service-current-hint" class="mt-2 text-[var(--color-brand-muted)] text-[11px] leading-snug">Scroll the arch to reveal the enquiry category. Add the visible service to build your enquiry checkout.</p>
+                                        </div>
+                                        <button id="service-add-button" type="button" class="rounded-full bg-[var(--color-brand-accent)] px-5 py-3 text-sm font-semibold text-[var(--color-brand-text-dark)] transition hover:bg-[var(--color-brand-accent-light)]">Add to Enquiry Cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -889,56 +892,38 @@
                 }
             });
 
-            const foundationScrollerTabs = document.querySelectorAll('#foundation-scroller .foundation-trigger');
-            const foundationScroller = document.getElementById('foundation-scroller');
             const scrollNext = document.getElementById('scroll-next');
-            const stoneLinks = document.getElementById('stone-links');
             const cartButton = document.getElementById('cart-button');
             const contactModal = document.getElementById('contact-modal');
             const contactClose = document.getElementById('contact-close');
             const contactMessage = document.getElementById('contact-message');
             const contactName = document.getElementById('contact-name');
             const contactEmail = document.getElementById('contact-email');
+            const serviceCurrentLabel = document.getElementById('service-current-label');
+            const serviceCurrentHint = document.getElementById('service-current-hint');
+            const serviceAddButton = document.getElementById('service-add-button');
             const flashToast = document.createElement('div');
             flashToast.id = 'flash-toast';
             document.body.appendChild(flashToast);
-            const foundationData = {
-                linkedin: {
-                    label: '[ S1: SADHYAWARE ]',
-                    service: 'Sadhyaware Overview',
-                    links: [
-                        { text: 'Sadhyaware Overview', href: '#consulting' },
-                        { text: 'Strategic AI Path', href: '#consulting' },
-                        { text: 'Systems Architecture', href: '#consulting' }
-                    ]
+            const serviceItems = [
+                {
+                    name: 'Tech Innovation Labs',
+                    hint: 'A research-led service category for rapid prototyping and enterprise innovation systems.',
+                    moveOffset: '-120px'
                 },
-                twitter: {
-                    label: '[ S2: SADHYASOFT ]',
-                    service: 'Strategic AI Path',
-                    links: [
-                        { text: 'Platform Engineering', href: '#consulting' },
-                        { text: 'Integration Roadmap', href: '#consulting' },
-                        { text: 'Product Delivery Flow', href: '#consulting' }
-                    ]
+                {
+                    name: 'Enterprise DevOps',
+                    hint: 'A services track for resilient deployment, observability, and continuous delivery workflows.',
+                    moveOffset: '0px'
                 },
-                youtube: {
-                    label: '[ S3: SADHYATECH ]',
-                    service: 'Systems Architecture',
-                    links: [
-                        { text: 'Tech Innovation Labs', href: '#consulting' },
-                        { text: 'Enterprise DevOps', href: '#consulting' },
-                        { text: 'Secure Systems Build', href: '#consulting' }
-                    ]
+                {
+                    name: 'Secure Systems Build',
+                    hint: 'A secure architecture service for system hardening, compliance, and operational persistence.',
+                    moveOffset: '120px'
                 }
-            };
-
-            let activeFoundation = 'linkedin';
+            ];
+            let currentServiceIndex = 0;
             const cartItems = [];
-            const serviceMessages = {
-                linkedin: 'I am interested in the Sadhyaware Overview incubator services, including strategic transformation, advisory systems and enterprise enablement.',
-                twitter: 'I am interested in the Strategic AI Path service, focused on platform engineering, integrations and future-ready AI operations.',
-                youtube: 'I am interested in Systems Architecture services, including secure systems, orchestration and enterprise delivery design.'
-            };
 
             function updateCartButton() {
                 if (cartButton) {
@@ -985,74 +970,47 @@
                 if (event.target === contactModal) closeContactModal();
             });
 
+            function updateServicePanel() {
+                const current = serviceItems[currentServiceIndex];
+                if (!current || !serviceCurrentLabel || !serviceCurrentHint) return;
+                serviceCurrentLabel.textContent = current.name;
+                serviceCurrentHint.textContent = current.hint;
+                moveSwanToSlot(current.moveOffset);
+            }
+
+            function moveSwanToSlot(offset) {
+                const swan = document.getElementById('swan-flyer');
+                if (!swan) return;
+                swan.style.transform = `translate(-50%, -50%) translate(${offset}, 0)`;
+            }
+
+            function addVisibleServiceToCart() {
+                const current = serviceItems[currentServiceIndex];
+                if (!current) return;
+                if (!cartItems.includes(current.name)) {
+                    cartItems.push(current.name);
+                    updateCartButton();
+                    showToast(`${current.name} added to enquiry cart.`);
+                } else {
+                    showToast(`${current.name} is already in your enquiry cart.`);
+                }
+            }
+
+            serviceAddButton?.addEventListener('click', addVisibleServiceToCart);
+            scrollNext?.addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                currentServiceIndex = (currentServiceIndex + 1) % serviceItems.length;
+                updateServicePanel();
+            });
+
             document.addEventListener('keydown', function (event) {
                 if (event.key === 'Escape' && contactModal && !contactModal.classList.contains('hidden')) {
                     closeContactModal();
                 }
             });
 
-            function moveSwanToButton(btn) {
-                const swan = document.getElementById('swan-flyer');
-                const container = swan?.parentElement;
-                if (!swan || !container || !btn) return;
-                const containerRect = container.getBoundingClientRect();
-                const buttonRect = btn.getBoundingClientRect();
-                const dx = buttonRect.left + buttonRect.width / 2 - (containerRect.left + containerRect.width / 2);
-                const dy = buttonRect.top + buttonRect.height / 2 - (containerRect.top + containerRect.height * 0.3);
-                swan.style.transform = `translate(-50%, -50%) translate(${dx}px, ${dy}px)`;
-                window.setTimeout(() => {
-                    showToast(`Service added to shopping cart by Sadhya Swan: ${btn.dataset.serviceName || btn.textContent.trim()}`);
-                }, 700);
-            }
-
-            function addItemToCart(serviceName) {
-                if (!serviceName) return;
-                if (!cartItems.includes(serviceName)) {
-                    cartItems.push(serviceName);
-                    updateCartButton();
-                }
-            }
-
-            function setActiveFoundation(social) {
-                activeFoundation = social;
-                foundationScrollerTabs.forEach(btn => {
-                    const isActive = btn.dataset.social === social;
-                    btn.classList.toggle('border-[var(--color-brand-accent)]', isActive);
-                    btn.classList.toggle('bg-[var(--color-brand-accent)]/10', isActive);
-                    if (isActive) btn.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-                });
-                if (stoneLinks) {
-                    stoneLinks.innerHTML = foundationData[social].links.map(link =>
-                        `<a href="${link.href}" class="stone-link block rounded-3xl border border-[var(--color-brand-border)] bg-[var(--color-brand-surface)] px-4 py-4 text-sm font-semibold text-[var(--color-brand-text-light)] transition hover:border-[var(--color-brand-accent)] hover:text-[var(--color-brand-accent)]">${link.text}</a>`
-                    ).join('');
-                }
-            }
-
-            foundationScrollerTabs.forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const social = btn.dataset.social;
-                    setActiveFoundation(social);
-                    addItemToCart(btn.dataset.serviceName || foundationData[social].service || btn.textContent.trim());
-                    moveSwanToButton(btn);
-                });
-            });
-
-            scrollNext?.addEventListener('click', function () {
-                const keys = Object.keys(foundationData);
-                const currentIndex = keys.indexOf(activeFoundation);
-                const next = keys[(currentIndex + 1) % keys.length];
-                setActiveFoundation(next);
-                if (foundationScroller) {
-                    foundationScroller.scrollBy({ left: foundationScroller.offsetWidth * 0.7, behavior: 'smooth' });
-                }
-                const activeBtn = Array.from(foundationScrollerTabs).find(btn => btn.dataset.social === next);
-                if (activeBtn) {
-                    addItemToCart(activeBtn.dataset.serviceName || foundationData[next].service || activeBtn.textContent.trim());
-                    moveSwanToButton(activeBtn);
-                }
-            });
-
-            setActiveFoundation(activeFoundation);
+            updateServicePanel();
             updateCartButton();
 
             // Initialize default state for social modal
