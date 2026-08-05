@@ -42,6 +42,62 @@
             animation: marquee 15s linear infinite;
             /* Adjust duration as needed */
         }
+
+        .wave-line {
+            display: block;
+            height: 4px;
+            border-radius: 9999px;
+            background: rgba(210, 95, 77, 0.35);
+            animation: wave 4s ease-in-out infinite;
+        }
+
+        .wave-line:nth-child(2) {
+            animation-duration: 3.6s;
+            opacity: 0.75;
+        }
+
+        .wave-line:nth-child(3) {
+            animation-duration: 4.5s;
+            opacity: 0.55;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: translateX(-10%);
+            }
+            50% {
+                transform: translateX(10%);
+            }
+        }
+
+        #flash-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            min-width: 280px;
+            max-width: 90%;
+            z-index: 60;
+            padding: 14px 18px;
+            border-radius: 999px;
+            background: rgba(5, 15, 35, 0.95);
+            color: #f8fafc;
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        #flash-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-8px);
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
     </style>
 
     <style type="text/tailwindcss">
@@ -115,11 +171,11 @@
                 <div class="relative group">
                     <button tabindex="0" class="hover:text-[var(--color-brand-accent)] transition" aria-haspopup="true">About Us & Social Handles</button>
                     <div tabindex="-1" class="absolute left-0 mt-2 w-56 bg-[var(--color-brand-primary)] border border-[var(--color-brand-border)] rounded-md py-2 invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100 group-focus-within:pointer-events-auto transition transform origin-top-left">
-                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">YouTube</a>
-                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Twitter</a>
+                        <button type="button" data-social="youtube" class="social-trigger block w-full text-left px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">YouTube</button>
+                        <button type="button" data-social="twitter" class="social-trigger block w-full text-left px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Twitter</button>
+                        <button type="button" data-social="linkedin" class="social-trigger block w-full text-left px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">LinkedIn</button>
                         <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Facebook</a>
                         <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Instagram</a>
-                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">LinkedIn</a>
                         <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Contact Us</a>
                     </div>
                 </div>
@@ -135,8 +191,8 @@
             </nav>
 
             <!-- Mobile Hamburger Button -->
-            <div class="md:hidden" x-data="{ open: false }">
-                <button @click="open = !open"
+            <div class="md:hidden">
+                <button id="mobile-nav-toggle" aria-expanded="false"
                     class="text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] focus:outline-none"
                     aria-label="Toggle Menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
@@ -148,10 +204,10 @@
 
             <div class="hidden md:block">
                 <div class="flex items-center space-x-4">
-                    <a href="mailto:enterprisesolutions@obizconsulting.com"
+                    <button id="cart-button" type="button"
                         class="text-xs font-bold uppercase tracking-wider bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-light)] text-[var(--color-brand-text-dark)] px-4 py-2.5 rounded transition">
-                        Inquire Node
-                    </a>
+                        Cart (0)
+                    </button>
                     <!-- Corporate Logo -->
                     <img src="img/SadhyawareTechnologies-TM-Transparent.png" alt="Corporate Logo" class="h-14">
                 </div>
@@ -159,8 +215,8 @@
         </div>
 
         <!-- Mobile Dynamic Navigation Drawer -->
-        <div x-show="open" @click.away="open = false"
-            class="md:hidden bg-[var(--color-brand-primary)] border-b border-[var(--color-brand-border)] px-6 py-4 space-y-3">
+        <div id="mobile-nav-drawer" class="hidden md:hidden bg-[var(--color-brand-primary)] border-b border-[var(--color-brand-border)] px-6 py-4 space-y-3"
+            aria-hidden="true">
             <div>
                 <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">Technology Consulting</a>
                 <div class="pl-4">
@@ -199,11 +255,11 @@
             <div>
                 <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">About Us & Social Handles</a>
                 <div class="pl-4">
-                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">YouTube</a>
-                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Twitter</a>
+                    <button type="button" data-social="youtube" class="social-trigger block w-full text-left px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">YouTube</button>
+                    <button type="button" data-social="twitter" class="social-trigger block w-full text-left px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Twitter</button>
+                    <button type="button" data-social="linkedin" class="social-trigger block w-full text-left px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">LinkedIn</button>
                     <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Facebook</a>
                     <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Instagram</a>
-                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">LinkedIn</a>
                     <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Contact Us</a>
                 </div>
             </div>
@@ -298,8 +354,127 @@
                         Domains</a>
                 </div>
 
+                <div class="relative w-full max-w-4xl mx-auto mt-10">
+                    <div class="relative w-full h-[420px] mx-auto">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="relative w-full h-full max-w-[520px]">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" class="w-full h-full text-[var(--color-brand-accent)] opacity-70 pointer-events-none">
+                                    <defs>
+                                        <style>
+                                            .arch-line { fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+                                            .shading-line { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-opacity: 0.6; }
+                                        </style>
+                                    </defs>
+                                    <path class="arch-line" d="M 120 40 L 680 40 L 650 90 L 150 90 Z" />
+                                    <rect class="arch-line" x="150" y="90" width="500" height="40" />
+                                    <rect class="arch-line" x="140" y="130" width="520" height="150" />
+                                    <rect class="arch-line" x="160" y="150" width="480" height="110" />
+                                    <path class="arch-line" d="M 230 400 A 170 170 0 0 1 570 400" />
+                                    <path class="arch-line" d="M 230 360 A 170 170 0 0 1 570 360" style="stroke-dasharray: 8, 8;" />
+                                    <path class="arch-line" d="M 200 400 A 200 200 0 0 1 600 400" />
+                                    <g id="left-capital">
+                                        <rect class="arch-line" x="190" y="280" width="110" height="20" rx="5" />
+                                        <path class="arch-line" d="M 200 340 C 170 340, 170 300, 200 300 C 230 300, 230 330, 205 330 C 190 330, 190 315, 205 315" />
+                                        <path class="arch-line" d="M 290 340 C 320 340, 320 300, 290 300 C 260 300, 260 330, 285 330 C 300 330, 300 315, 285 315" />
+                                        <rect class="arch-line" x="200" y="340" width="90" height="20" />
+                                        <line class="shading-line" x1="210" y1="347" x2="280" y2="347" />
+                                        <line class="shading-line" x1="210" y1="353" x2="280" y2="353" />
+                                    </g>
+                                    <g id="right-capital">
+                                        <rect class="arch-line" x="500" y="280" width="110" height="20" rx="5" />
+                                        <path class="arch-line" d="M 510 340 C 480 340, 480 300, 510 300 C 540 300, 540 330, 515 330 C 500 330, 500 315, 515 315" />
+                                        <path class="arch-line" d="M 600 340 C 630 340, 630 300, 600 300 C 570 300, 570 330, 595 330 C 610 330, 610 315, 595 315" />
+                                        <rect class="arch-line" x="510" y="340" width="90" height="20" />
+                                        <line class="shading-line" x1="520" y1="347" x2="590" y2="347" />
+                                        <line class="shading-line" x1="520" y1="353" x2="590" y2="353" />
+                                    </g>
+                                    <line class="arch-line" x1="210" y1="360" x2="210" y2="780" />
+                                    <line class="arch-line" x1="280" y1="360" x2="280" y2="780" />
+                                    <line class="shading-line" x1="224" y1="370" x2="224" y2="770" />
+                                    <line class="shading-line" x1="238" y1="370" x2="238" y2="770" />
+                                    <line class="shading-line" x1="252" y1="370" x2="252" y2="770" />
+                                    <line class="shading-line" x1="266" y1="370" x2="266" y2="770" />
+                                    <line class="arch-line" x1="520" y1="360" x2="520" y2="780" />
+                                    <line class="arch-line" x1="590" y1="360" x2="590" y2="780" />
+                                    <line class="shading-line" x1="534" y1="370" x2="534" y2="770" />
+                                    <line class="shading-line" x1="548" y1="370" x2="548" y2="770" />
+                                    <line class="shading-line" x1="562" y1="370" x2="562" y2="770" />
+                                    <line class="shading-line" x1="576" y1="370" x2="576" y2="770" />
+                                    <rect class="arch-line" x="180" y="780" width="130" height="30" />
+                                    <rect class="arch-line" x="490" y="780" width="130" height="30" />
+                                    <rect class="arch-line" x="140" y="810" width="520" height="50" />
+                                </svg>
+                                <div id="swan-flyer" class="absolute left-1/2 top-[30%] z-20 -translate-x-1/2 -translate-y-1/2 w-24 h-24 pointer-events-none transition-transform duration-700 ease-in-out">
+                                    <img src="img/SadhyaSwanLogo-TransparentTM.png" alt="Sadhya Swan Mark" class="w-full h-full object-contain" />
+                                </div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <img src="img/SadhyaSwanLogo-TransparentTM.png" alt="Sadhya Swan Mark" class="w-28 h-28 object-contain opacity-0" />
+                                </div>
+                                <div class="absolute top-[18%] left-1/2 -translate-x-1/2 text-center select-none pointer-events-none">
+                                    <span class="text-xs md:text-sm font-mono tracking-[0.25em] font-bold text-[var(--color-brand-text-light)]">
+                                        THEORY-TO-PRAXIS™
+                                    </span>
+                                </div>
+                                <div class="absolute bottom-[26%] left-1/2 -translate-x-1/2 w-3/4 space-y-1 pointer-events-none">
+                                    <span class="wave-line"></span>
+                                    <span class="wave-line"></span>
+                                    <span class="wave-line"></span>
+                                </div>
+                                <button id="scroll-next" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] px-4 py-3 text-[var(--color-brand-accent)] hover:bg-[var(--color-brand-border)] transition shadow-lg shadow-black/20 pointer-events-auto" aria-label="Scroll foundation next">
+                                    &gt;
+                                </button>
+                                <div class="absolute bottom-[9%] left-1/2 -translate-x-1/2 w-[60%] max-w-[440px] bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] rounded-3xl shadow-xl px-3 py-3 pointer-events-auto">
+                                    <div id="foundation-scroller" class="flex space-x-4 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth text-center px-2">
+                                        <button type="button" data-social="linkedin" data-service-name="Sadhyaware Overview" class="foundation-trigger snap-center shrink-0 min-w-[220px] max-w-[240px] text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--color-brand-accent)] px-3 py-1 bg-slate-900/60 rounded border border-slate-800">[ S1: SADHYAWARE ]</button>
+                                        <button type="button" data-social="twitter" data-service-name="Strategic AI Path" class="foundation-trigger snap-center shrink-0 min-w-[220px] max-w-[240px] text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--color-brand-gold)] px-3 py-1 bg-slate-900/60 rounded border border-slate-800">[ S2: SADHYASOFT ]</button>
+                                        <button type="button" data-social="youtube" data-service-name="Systems Architecture" class="foundation-trigger snap-center shrink-0 min-w-[220px] max-w-[240px] text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-400 px-3 py-1 bg-slate-900/60 rounded border border-slate-800">[ S3: SADHYATECH ]</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="stone-links" class="mt-6 grid grid-cols-1 gap-3 lg:grid-cols-3">
+                        <a href="#consulting" class="stone-link block rounded-3xl border border-[var(--color-brand-border)] bg-[var(--color-brand-surface)] px-4 py-4 text-sm font-semibold text-[var(--color-brand-text-light)] transition hover:border-[var(--color-brand-accent)] hover:text-[var(--color-brand-accent)]">Sadhyaware Overview</a>
+                        <a href="#consulting" class="stone-link block rounded-3xl border border-[var(--color-brand-border)] bg-[var(--color-brand-surface)] px-4 py-4 text-sm font-semibold text-[var(--color-brand-text-light)] transition hover:border-[var(--color-brand-accent)] hover:text-[var(--color-brand-accent)]">Strategic AI Path</a>
+                        <a href="#consulting" class="stone-link block rounded-3xl border border-[var(--color-brand-border)] bg-[var(--color-brand-surface)] px-4 py-4 text-sm font-semibold text-[var(--color-brand-text-light)] transition hover:border-[var(--color-brand-accent)] hover:text-[var(--color-brand-accent)]">Systems Architecture</a>
+                    </div>
+                </div>
+
             </div>
         </section>
+
+<div id="contact-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 px-4 py-6">
+    <div class="w-full max-w-3xl rounded-3xl border border-[var(--color-brand-border)] bg-[var(--color-brand-primary)]/98 shadow-2xl p-6 text-[var(--color-brand-text-light)]">
+        <div class="flex items-center justify-between mb-4">
+            <div>
+                <h3 class="text-xl font-bold">Service Enquiry Cart</h3>
+                <p class="text-sm text-[var(--color-brand-muted)]">Review your selected services and submit your enquiry.</p>
+            </div>
+            <button id="contact-close" class="text-[var(--color-brand-text-light)] hover:text-[var(--color-brand-accent-light)] text-3xl leading-none">&times;</button>
+        </div>
+        <form id="contact-form" method="post" action="https://formspree.io/f/mvonbyjo" class="space-y-4">
+            <input type="hidden" name="_subject" value="Sadhya Swan Service Enquiry" />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <label class="block text-sm text-[var(--color-brand-muted)]">
+                    <span class="block mb-1">Name</span>
+                    <input type="text" name="name" id="contact-name" class="w-full rounded-xl border border-[var(--color-brand-border)] bg-[var(--color-brand-surface)] px-4 py-3 text-sm text-[var(--color-brand-text-light)] focus:border-[var(--color-brand-accent)] outline-none" />
+                </label>
+                <label class="block text-sm text-[var(--color-brand-muted)]">
+                    <span class="block mb-1">Email</span>
+                    <input type="email" name="email" id="contact-email" class="w-full rounded-xl border border-[var(--color-brand-border)] bg-[var(--color-brand-surface)] px-4 py-3 text-sm text-[var(--color-brand-text-light)] focus:border-[var(--color-brand-accent)] outline-none" />
+                </label>
+            </div>
+            <label class="block text-sm text-[var(--color-brand-muted)]">
+                <span class="block mb-1">Message</span>
+                <textarea name="message" id="contact-message" rows="6" class="w-full rounded-3xl border border-[var(--color-brand-border)] bg-[var(--color-brand-surface)] px-4 py-3 text-sm text-[var(--color-brand-text-light)] focus:border-[var(--color-brand-accent)] outline-none"></textarea>
+            </label>
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                <button type="submit" class="w-full sm:w-auto rounded-xl bg-[var(--color-brand-accent)] px-5 py-3 text-sm font-semibold text-[var(--color-brand-text-dark)] transition hover:bg-[var(--color-brand-accent-light)]">Send Message</button>
+                <button type="reset" class="w-full sm:w-auto rounded-xl border border-[var(--color-brand-border)] bg-transparent px-5 py-3 text-sm font-semibold text-[var(--color-brand-text-light)] transition hover:border-[var(--color-brand-accent)]">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
 
         <hr class="border-[var(--color-brand-border)] max-w-7xl mx-auto my-4">
 
@@ -607,6 +782,40 @@
                 });
             });
 
+            // Mobile drawer toggle
+            const mobileToggle = document.getElementById('mobile-nav-toggle');
+            const mobileDrawer = document.getElementById('mobile-nav-drawer');
+            let mobileOpen = false;
+
+            function setMobileDrawerState(open) {
+                mobileOpen = open;
+                if (mobileDrawer) {
+                    mobileDrawer.classList.toggle('hidden', !open);
+                    mobileDrawer.style.display = open ? 'block' : 'none';
+                    mobileDrawer.setAttribute('aria-hidden', (!open).toString());
+                }
+                if (mobileToggle) {
+                    mobileToggle.setAttribute('aria-expanded', open.toString());
+                }
+            }
+
+            mobileToggle?.addEventListener('click', function () {
+                setMobileDrawerState(!mobileOpen);
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!mobileOpen || !mobileDrawer || !mobileToggle) return;
+                if (!mobileDrawer.contains(event.target) && !mobileToggle.contains(event.target) && window.innerWidth < 768) {
+                    setMobileDrawerState(false);
+                }
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    setMobileDrawerState(false);
+                }
+            });
+
             // Social timeline modal
             const socialModal = document.getElementById('social-timeline-modal');
             const socialClose = document.getElementById('social-timeline-close');
@@ -679,6 +888,172 @@
                     if (socialModal && !socialModal.classList.contains('hidden')) toggleModal(socialModal, false);
                 }
             });
+
+            const foundationScrollerTabs = document.querySelectorAll('#foundation-scroller .foundation-trigger');
+            const foundationScroller = document.getElementById('foundation-scroller');
+            const scrollNext = document.getElementById('scroll-next');
+            const stoneLinks = document.getElementById('stone-links');
+            const cartButton = document.getElementById('cart-button');
+            const contactModal = document.getElementById('contact-modal');
+            const contactClose = document.getElementById('contact-close');
+            const contactMessage = document.getElementById('contact-message');
+            const contactName = document.getElementById('contact-name');
+            const contactEmail = document.getElementById('contact-email');
+            const flashToast = document.createElement('div');
+            flashToast.id = 'flash-toast';
+            document.body.appendChild(flashToast);
+            const foundationData = {
+                linkedin: {
+                    label: '[ S1: SADHYAWARE ]',
+                    service: 'Sadhyaware Overview',
+                    links: [
+                        { text: 'Sadhyaware Overview', href: '#consulting' },
+                        { text: 'Strategic AI Path', href: '#consulting' },
+                        { text: 'Systems Architecture', href: '#consulting' }
+                    ]
+                },
+                twitter: {
+                    label: '[ S2: SADHYASOFT ]',
+                    service: 'Strategic AI Path',
+                    links: [
+                        { text: 'Platform Engineering', href: '#consulting' },
+                        { text: 'Integration Roadmap', href: '#consulting' },
+                        { text: 'Product Delivery Flow', href: '#consulting' }
+                    ]
+                },
+                youtube: {
+                    label: '[ S3: SADHYATECH ]',
+                    service: 'Systems Architecture',
+                    links: [
+                        { text: 'Tech Innovation Labs', href: '#consulting' },
+                        { text: 'Enterprise DevOps', href: '#consulting' },
+                        { text: 'Secure Systems Build', href: '#consulting' }
+                    ]
+                }
+            };
+
+            let activeFoundation = 'linkedin';
+            const cartItems = [];
+            const serviceMessages = {
+                linkedin: 'I am interested in the Sadhyaware Overview incubator services, including strategic transformation, advisory systems and enterprise enablement.',
+                twitter: 'I am interested in the Strategic AI Path service, focused on platform engineering, integrations and future-ready AI operations.',
+                youtube: 'I am interested in Systems Architecture services, including secure systems, orchestration and enterprise delivery design.'
+            };
+
+            function updateCartButton() {
+                if (cartButton) {
+                    cartButton.textContent = `Cart (${cartItems.length})`;
+                }
+            }
+
+            function showToast(message) {
+                if (!flashToast) return;
+                flashToast.textContent = message;
+                flashToast.classList.add('show');
+                window.clearTimeout(flashToast.timeoutId);
+                flashToast.timeoutId = window.setTimeout(() => {
+                    flashToast.classList.remove('show');
+                }, 2200);
+            }
+
+            function writeContactMessage() {
+                if (!contactMessage) return;
+                const services = cartItems.length ? cartItems.join(', ') : 'selected services';
+                const aiDraft = cartItems.length ? cartItems.map(item => item).join(' + ') : 'a custom service package';
+                contactMessage.value = `Hello Sadhyaware Team,\n\nI would like to enquire about ${services}. Please provide more information on ${aiDraft} and how we can engage your team on this initiative. Looking forward to your response.\n\nThank you.`;
+            }
+
+            function openContactModal() {
+                if (contactModal) {
+                    contactModal.classList.remove('hidden');
+                }
+                writeContactMessage();
+            }
+
+            function closeContactModal() {
+                if (contactModal) {
+                    contactModal.classList.add('hidden');
+                }
+            }
+
+            cartButton?.addEventListener('click', function () {
+                openContactModal();
+            });
+
+            contactClose?.addEventListener('click', closeContactModal);
+            contactModal?.addEventListener('click', function (event) {
+                if (event.target === contactModal) closeContactModal();
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape' && contactModal && !contactModal.classList.contains('hidden')) {
+                    closeContactModal();
+                }
+            });
+
+            function moveSwanToButton(btn) {
+                const swan = document.getElementById('swan-flyer');
+                const container = swan?.parentElement;
+                if (!swan || !container || !btn) return;
+                const containerRect = container.getBoundingClientRect();
+                const buttonRect = btn.getBoundingClientRect();
+                const dx = buttonRect.left + buttonRect.width / 2 - (containerRect.left + containerRect.width / 2);
+                const dy = buttonRect.top + buttonRect.height / 2 - (containerRect.top + containerRect.height * 0.3);
+                swan.style.transform = `translate(-50%, -50%) translate(${dx}px, ${dy}px)`;
+                window.setTimeout(() => {
+                    showToast(`Service added to shopping cart by Sadhya Swan: ${btn.dataset.serviceName || btn.textContent.trim()}`);
+                }, 700);
+            }
+
+            function addItemToCart(serviceName) {
+                if (!serviceName) return;
+                if (!cartItems.includes(serviceName)) {
+                    cartItems.push(serviceName);
+                    updateCartButton();
+                }
+            }
+
+            function setActiveFoundation(social) {
+                activeFoundation = social;
+                foundationScrollerTabs.forEach(btn => {
+                    const isActive = btn.dataset.social === social;
+                    btn.classList.toggle('border-[var(--color-brand-accent)]', isActive);
+                    btn.classList.toggle('bg-[var(--color-brand-accent)]/10', isActive);
+                    if (isActive) btn.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+                });
+                if (stoneLinks) {
+                    stoneLinks.innerHTML = foundationData[social].links.map(link =>
+                        `<a href="${link.href}" class="stone-link block rounded-3xl border border-[var(--color-brand-border)] bg-[var(--color-brand-surface)] px-4 py-4 text-sm font-semibold text-[var(--color-brand-text-light)] transition hover:border-[var(--color-brand-accent)] hover:text-[var(--color-brand-accent)]">${link.text}</a>`
+                    ).join('');
+                }
+            }
+
+            foundationScrollerTabs.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const social = btn.dataset.social;
+                    setActiveFoundation(social);
+                    addItemToCart(btn.dataset.serviceName || foundationData[social].service || btn.textContent.trim());
+                    moveSwanToButton(btn);
+                });
+            });
+
+            scrollNext?.addEventListener('click', function () {
+                const keys = Object.keys(foundationData);
+                const currentIndex = keys.indexOf(activeFoundation);
+                const next = keys[(currentIndex + 1) % keys.length];
+                setActiveFoundation(next);
+                if (foundationScroller) {
+                    foundationScroller.scrollBy({ left: foundationScroller.offsetWidth * 0.7, behavior: 'smooth' });
+                }
+                const activeBtn = Array.from(foundationScrollerTabs).find(btn => btn.dataset.social === next);
+                if (activeBtn) {
+                    addItemToCart(activeBtn.dataset.serviceName || foundationData[next].service || activeBtn.textContent.trim());
+                    moveSwanToButton(activeBtn);
+                }
+            });
+
+            setActiveFoundation(activeFoundation);
+            updateCartButton();
 
             // Initialize default state for social modal
             renderHeadlines(activeSocial, activeYear);
