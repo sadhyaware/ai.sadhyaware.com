@@ -48,10 +48,10 @@
         @theme {
             /* Synchronized Canva Core Brand Palette Variables */
             --color-brand-primary: #0b0f19;
-            --color-brand-accent: #ff5757;
-            --color-brand-accent-light: #ff6f6f; /* Lighter shade for hover */
+            --color-brand-accent: #d25f4d; /* vivid red */
+            --color-brand-accent-light: #e48b72; /* Softer muted orange for hover */
             --color-brand-surface: #1e293b;
-            --color-brand-muted: #64748b;
+            --color-brand-muted: #94a3b8;
             --color-brand-text-light: #f1f5f9;
             --color-brand-text-dark: #0f172a;
             --color-brand-border: #334155;
@@ -72,18 +72,14 @@
     <header
         class="border-b border-[var(--color-brand-border)] bg-[var(--color-brand-primary)]/80 backdrop-blur sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center">
-                <!-- Sadhyaware Brand Logo -->
-                <img src="SSadhyaTheory-to-Praxis-PPP-TM-Transparent.png" alt="Sadhyaware Logo" class="h-21 mr-3">
 
-            </div>
 
             <!-- Desktop Navigation Menu -->
             <nav
                 class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-wider text-[var(--color-brand-muted)]">
                 <a href="#consulting" class="hover:text-[var(--color-brand-accent)] transition">Technology
                     Consulting</a>
-                <a href="#ai-solutions" class="hover:text-[var(--color-brand-accent)] transition">AI Platforms</a>
+                <a href="#ai-solutions" class="hover:text-[var(--color-brand-accent)] transition">AI Services</a>
                 <a href="#s3-sec" class="hover:text-[var(--color-brand-accent)] transition">Talent Incubator</a>
                 <a href="#s3-sec" class="hover:text-[var(--color-brand-accent)] transition">Products & Platforms</a>
             </nav>
@@ -107,7 +103,7 @@
                         Inquire Node
                     </a>
                     <!-- Corporate Logo -->
-                    <img src="SadhyawareTechnologies-TM-Transparent.png" alt="Corporate Logo" class="h-14">
+                    <img src="img/SadhyawareTechnologies-TM-Transparent.png" alt="Corporate Logo" class="h-14">
                 </div>
             </div>
         </div>
@@ -115,18 +111,49 @@
         <!-- Mobile Dynamic Navigation Drawer -->
         <div x-show="open" @click.away="open = false"
             class="md:hidden bg-[var(--color-brand-primary)] border-b border-[var(--color-brand-border)] px-6 py-4 space-y-3">
-            <a href="#consulting"
-                class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">Technology
-                Consulting</a>
-            <a href="#ai-solutions"
-                class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">AI
-                Platforms</a>
-            <a href="#s3-sec"
-                class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">Talent
-                Incubator</a>
-            <a href="#products"
-                class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">Products
-                & Platforms</a>
+            <div>
+                <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">Technology Consulting</a>
+                <div class="pl-4">
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Overview</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Capabilities</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Engagement Models</a>
+                </div>
+            </div>
+            <div>
+                <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">AI Services</a>
+                <div class="pl-4">
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Overview</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Products</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Use Cases</a>
+                </div>
+            </div>
+            <div>
+                <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">Talent Incubator</a>
+                <div class="pl-4">
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Programs</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Apply</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Success Stories</a>
+                </div>
+            </div>
+            <div>
+                <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">Products & Platforms</a>
+                <div class="pl-4">
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Platforms</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Integrations</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Professional Services</a>
+                </div>
+            </div>
+            <div>
+                <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">About Us & Social Handles</a>
+                <div class="pl-4">
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">YouTube</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Twitter</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Facebook</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Instagram</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">LinkedIn</a>
+                </div>
+            </div>
+
             <a href="mailto:enterprisesolutions@obizconsulting.com"
                 class="block text-sm font-bold text-[var(--color-brand-accent)] pt-2 border-t border-[var(--color-brand-border)]">Inquire
                 Node &rarr;</a>
@@ -137,9 +164,9 @@
     <main class="flex-grow">
         <section class=" text-center space-y-6 ">
             <div class="flex flex-col">
-                <span class="text-xl font-extrabold tracking-wider text-[var(--color-brand-accent)]">SADHYAWARE</span>
+                <span class="text-xl font-extrabold tracking-wider ">Sadhyaware Technologies</span>
                 <span
-                    class="text-[9px] uppercase tracking-[0.25em] text-[var(--color-brand-muted)] font-semibold">People
+                    class="text-[9px] uppercase tracking-[0.25em]  font-semibold">People
                     • Process • Platforms</span>
             </div>
         </section>
@@ -152,7 +179,7 @@
             <!-- Changed to z-0 and boosted opacity slightly for better contrast on dark themes -->
             <div
                 class="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-10 select-none">
-                <img src="SadhyaSwanLogo-TransparentTM.png" alt="Watermark"
+                <img src="img/SadhyaSwanLogo-TransparentTM.png" alt="Watermark"
                     class="w-1/2 h-auto max-w-[400px] object-contain">
             </div>
 
@@ -176,7 +203,7 @@
                     </span>
                     <span x-text="currentCountries"></span>
                     <!-- Small inline Swan logo -->
-                    <img src="SadhyaSwanLogo-TransparentTM.png" alt="Sadhyaware Swan Logo"
+                    <img src="img/SadhyaSwanLogo-TransparentTM.png" alt="Sadhyaware Swan Logo"
                         class="h-34 w-34 object-contain">
                     <button @click="currentCountryIndex = (currentCountryIndex + 1) % countryGroups.length"
                         class="ml-2 p-1 rounded-full bg-[var(--color-brand-border)] hover:bg-[var(--color-brand-accent)] text-[var(--color-brand-text-light)] hover:text-[var(--color-brand-text-dark)] transition-colors focus:outline-none">
@@ -201,9 +228,10 @@
                 </p>
                 <div
                     class="pt-4 flex flex-col sm:flex-row justify-center items-center gap-3 text-xs font-semibold uppercase tracking-wider w-full">
-                    <a href="#s3-sec"
-                        class="w-full sm:w-auto bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-light)] text-[var(--color-brand-text-dark)] px-5 py-3 rounded shadow-lg shadow-[var(--color-brand-accent)]/10 transition text-center">Launch
-                        Incubator</a>
+                    <button id="launch-incubator-button"
+                        class="w-full sm:w-auto bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-light)] text-[var(--color-brand-text-dark)] px-5 py-3 rounded shadow-lg shadow-[var(--color-brand-accent)]/10 transition text-center">
+                        Launch Incubator
+                    </button>
                     <a href="#consulting"
                         class="w-full sm:w-auto bg-[var(--color-brand-surface)] hover:bg-[var(--color-brand-border)] text-[var(--color-brand-text-light)] border border-[var(--color-brand-border)] px-5 py-3 rounded transition text-center">View
                         Domains</a>
@@ -222,9 +250,9 @@
                 <h3 class="text-xl md:text-3xl font-bold tracking-tight text-[var(--color-brand-text-light)] mt-2">
                     Targeted Industry Domains & Systems Focus</h3>
                 <p class="text-[var(--color-brand-muted)] text-xs md:text-sm mt-3 font-light leading-relaxed">
-                    Building on a tenured track record scaling enterprise architecture globally between 1998 and 2008
+                    Building on a tenured track record scaling enterprise architecture globally between 1998 and 2026
                     across the world's primary economic hubs—including complex system deliveries in Singapore, the
-                    United States, and the United Kingdom—we offer hardened consulting structures across six major
+                    United States, and the United Kingdom—we offer hardened consulting structures across nine major
                     digital frontiers:
                 </p>
             </div>
@@ -310,3 +338,257 @@
             <div class="max-w-3xl">
                 <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-brand-accent)]">02 / Automated
                     Platforms</h2>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-[var(--color-brand-border)] bg-[var(--color-brand-primary)]/90 text-[var(--color-brand-muted)] py-8">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-6">
+            <div class="max-w-2xl">
+                <p class="text-sm">© 2024-2026 Sadhyaware Technologies. All rights reserved. Brands and trademarks are property of their respective owners.</p>
+                <p class="text-xs mt-2">Legal disclaimer: This site provides informational content only. We will soon be converting to MSME status in India; updates will be posted here.</p>
+            </div>
+            <div class="flex flex-col items-start md:items-end gap-3">
+                <div class="flex gap-2">
+                    <button data-social="linkedin" class="social-trigger bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-light)] text-[var(--color-brand-text-dark)] px-4 py-2 rounded text-sm">LinkedIn Timeline</button>
+                    <button data-social="twitter" class="social-trigger bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-light)] text-[var(--color-brand-text-dark)] px-4 py-2 rounded text-sm">Twitter Timeline</button>
+                    <button data-social="youtube" class="social-trigger bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-light)] text-[var(--color-brand-text-dark)] px-4 py-2 rounded text-sm">YouTube Timeline</button>
+                </div>
+                <p class="text-xs text-[var(--color-brand-muted)] mt-2">Click a timeline to view curated headlines by year.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Social Timeline Modal -->
+    <div id="social-timeline-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 px-4 py-6">
+        <div class="max-w-3xl w-full rounded-2xl border border-[var(--color-brand-border)] bg-[var(--color-brand-primary)]/98 shadow-2xl p-6 text-[var(--color-brand-text-light)]">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold">Social Timeline</h3>
+                <button id="social-timeline-close" class="text-[var(--color-brand-text-light)] hover:text-[var(--color-brand-accent-light)] text-2xl leading-none">&times;</button>
+            </div>
+            <div class="flex gap-4 mb-4">
+                <button type="button" data-year="2024" class="year-tab px-3 py-2 rounded bg-[var(--color-brand-surface)]/80">2024</button>
+                <button type="button" data-year="2025" class="year-tab px-3 py-2 rounded bg-[var(--color-brand-surface)]/80">2025</button>
+                <button type="button" data-year="2026" class="year-tab px-3 py-2 rounded bg-[var(--color-brand-surface)]/80">2026</button>
+            </div>
+            <div class="rounded-lg border border-[var(--color-brand-border)] bg-[var(--color-brand-surface)]/90 p-4 min-h-[180px]">
+                <div id="timeline-headlines" class="space-y-3 text-sm text-[var(--color-brand-muted)]">
+                    <!-- Headlines will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="launch-incubator-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 px-4 py-6">
+        <div class="max-w-6xl w-full rounded-3xl border border-[var(--color-brand-border)] bg-[var(--color-brand-primary)]/98 shadow-2xl shadow-black/40 overflow-hidden text-[var(--color-brand-text-light)]">
+            <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6">
+                <div class="p-6 lg:p-8">
+                    <div class="flex items-start justify-between gap-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <img src="img/SSadhyaTheory-to-Praxis-PPP-TM-Transparent.png" alt="Sadhyaware Logo" class="h-16 w-auto">
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.24em] text-[var(--color-brand-accent)] font-semibold">Incubator Launch</p>
+                                <h3 class="mt-2 text-2xl font-bold leading-tight">Build the story, not just the system.</h3>
+                            </div>
+                        </div>
+                        <button id="launch-incubator-close" class="text-[var(--color-brand-text-light)] hover:text-[var(--color-brand-accent-light)] text-3xl leading-none">&times;</button>
+                    </div>
+
+                    <p class="text-sm text-[var(--color-brand-muted)] leading-relaxed max-w-2xl mb-6">
+                        Our incubator is designed to connect business intent, industry context, engineering capability, and data flow into one compelling narrative. Use the tabs below to explore how each pillar builds a richer delivery story.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-brand-muted)]">
+                            <button type="button" data-tab="framework" class="tab-button py-3 rounded-xl bg-[var(--color-brand-surface)]/80 transition text-left focus:outline-none hover:bg-[var(--color-brand-surface)]/100">Digital Drafter Framework</button>
+                            <button type="button" data-tab="industry" class="tab-button py-3 rounded-xl bg-[var(--color-brand-surface)]/80 transition text-left focus:outline-none hover:bg-[var(--color-brand-surface)]/100">Industry Alignment</button>
+                            <button type="button" data-tab="engineering" class="tab-button py-3 rounded-xl bg-[var(--color-brand-surface)]/80 transition text-left focus:outline-none hover:bg-[var(--color-brand-surface)]/100">Engineering Domain</button>
+                            <button type="button" data-tab="data" class="tab-button py-3 rounded-xl bg-[var(--color-brand-surface)]/80 transition text-left focus:outline-none hover:bg-[var(--color-brand-surface)]/100">Data Pipelines</button>
+                        </div>
+
+                        <div class="rounded-3xl border border-[var(--color-brand-border)] bg-[var(--color-brand-surface)]/90 p-5 min-h-[300px]">
+                            <div data-tab-panel="framework" class="tab-panel">
+                                <h4 class="text-lg font-bold text-[var(--color-brand-text-light)] mb-3">A blueprint for creative execution</h4>
+                                <p class="text-sm text-[var(--color-brand-muted)] leading-relaxed mb-4">
+                                    The Digital Drafter Framework turns big ideas into a structured playbook. It sets the stage for how we define the opportunity, sketch the user journey, and translate value into technical milestones.
+                                </p>
+                                <p class="text-sm text-[var(--color-brand-muted)] leading-relaxed">
+                                    This is the anchor that keeps product, design, and engineering aligned as the solution moves from theory into practice.
+                                </p>
+                            </div>
+
+                            <div data-tab-panel="industry" class="tab-panel hidden">
+                                <h4 class="text-lg font-bold text-[var(--color-brand-text-light)] mb-3">Sector-aware strategy that resonates</h4>
+                                <p class="text-sm text-[var(--color-brand-muted)] leading-relaxed mb-4">
+                                    Industry Alignment is about shaping the incubator outcome around real market forces, regulatory requirements, and the decision-making pressures each domain faces.
+                                </p>
+                                <p class="text-sm text-[var(--color-brand-muted)] leading-relaxed">
+                                    We position the solution to speak directly to stakeholders, supply chains, compliance teams, and enterprise buyers.
+                                </p>
+                            </div>
+
+                            <div data-tab-panel="engineering" class="tab-panel hidden">
+                                <h4 class="text-lg font-bold text-[var(--color-brand-text-light)] mb-3">Domain-driven engineering excellence</h4>
+                                <p class="text-sm text-[var(--color-brand-muted)] leading-relaxed mb-4">
+                                    Engineering Domain focuses on the implementation story: architecture, integrations, performance, and sustainable delivery patterns.
+                                </p>
+                                <p class="text-sm text-[var(--color-brand-muted)] leading-relaxed">
+                                    It ensures that the incubator output is not just compelling on paper, but robust, maintainable, and ready for enterprise adoption.
+                                </p>
+                            </div>
+
+                            <div data-tab-panel="data" class="tab-panel hidden">
+                                <h4 class="text-lg font-bold text-[var(--color-brand-text-light)] mb-3">Data pipelines as the strategic backbone</h4>
+                                <p class="text-sm text-[var(--color-brand-muted)] leading-relaxed mb-4">
+                                    Data Pipelines create the connective tissue between insight and action. They define how data is collected, refined, and delivered to the systems that power decisions.
+                                </p>
+                                <p class="text-sm text-[var(--color-brand-muted)] leading-relaxed">
+                                    With clean, secure, and scalable data flows, the incubator becomes a living engine for intelligence, automation, and continuous value creation.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden bg-[url('img/SadhyaSwanLogo-TransparentTM.png')] bg-cover bg-center min-h-[360px] lg:min-h-[auto]">
+                    <div class="absolute inset-0 bg-black/50"></div>
+                    <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                        <div class="max-w-xs">
+                            <span class="inline-block bg-[var(--color-brand-accent)]/90 px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.25em] font-semibold">Incubator Narrative</span>
+                            <h4 class="mt-4 text-2xl font-bold leading-tight">A visual backdrop for the idea flow</h4>
+                            <p class="mt-3 text-sm text-white/80 leading-relaxed">
+                                The brand mark sits softly behind the text, supporting the story without stealing attention. This gives the popup depth and keeps the content easy to scan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Incubator modal + tabs
+            const openButton = document.getElementById('launch-incubator-button');
+            const modal = document.getElementById('launch-incubator-modal');
+            const closeButton = document.getElementById('launch-incubator-close');
+            const tabButtons = document.querySelectorAll('#launch-incubator-modal .tab-button');
+            const tabPanels = document.querySelectorAll('#launch-incubator-modal [data-tab-panel]');
+
+            function toggleModal(modalEl, show) {
+                if (!modalEl) return;
+                modalEl.classList.toggle('hidden', !show);
+            }
+
+            function setActiveTab(tabName) {
+                tabButtons.forEach(button => {
+                    const isActive = button.dataset.tab === tabName;
+                    button.classList.toggle('bg-[var(--color-brand-accent)]/15', isActive);
+                    button.classList.toggle('text-[var(--color-brand-text-light)]', isActive);
+                    button.classList.toggle('text-[var(--color-brand-muted)]', !isActive);
+                });
+                tabPanels.forEach(panel => {
+                    panel.classList.toggle('hidden', panel.dataset.tabPanel !== tabName);
+                });
+            }
+
+            openButton?.addEventListener('click', function () {
+                toggleModal(modal, true);
+                setActiveTab('framework');
+            });
+
+            closeButton?.addEventListener('click', function () {
+                toggleModal(modal, false);
+            });
+
+            modal?.addEventListener('click', function (event) {
+                if (event.target === modal) {
+                    toggleModal(modal, false);
+                }
+            });
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    setActiveTab(button.dataset.tab);
+                });
+            });
+
+            // Social timeline modal
+            const socialModal = document.getElementById('social-timeline-modal');
+            const socialClose = document.getElementById('social-timeline-close');
+            const socialTriggers = document.querySelectorAll('.social-trigger');
+            const yearTabs = document.querySelectorAll('#social-timeline-modal .year-tab');
+            const headlinesContainer = document.getElementById('timeline-headlines');
+            let activeSocial = 'linkedin';
+            let activeYear = '2026';
+
+            const socialContent = {
+                linkedin: {
+                    '2024': ['LinkedIn: Launched pilot program Q3 2024', 'LinkedIn: Partnership announced with XYZ'],
+                    '2025': ['LinkedIn: Scaled incubator cohorts', 'LinkedIn: Product beta released'],
+                    '2026': ['LinkedIn: MSME conversion preparations', 'LinkedIn: Major enterprise win']
+                },
+                twitter: {
+                    '2024': ['Twitter: Highlights from our first demo day', 'Twitter: Thought leadership thread on AI ops'],
+                    '2025': ['Twitter: Live event coverage and recaps', 'Twitter: Customer testimonial snippets'],
+                    '2026': ['Twitter: Keynotes and conference takeaways', 'Twitter: Product roadmap announcements']
+                },
+                youtube: {
+                    '2024': ['YouTube: Incubator Overview video', 'YouTube: Founder interview'],
+                    '2025': ['YouTube: Demo walkthroughs', 'YouTube: Customer case studies'],
+                    '2026': ['YouTube: Product launch livestream', 'YouTube: Training series']
+                }
+            };
+
+            function renderHeadlines(social, year) {
+                const items = (socialContent[social] && socialContent[social][year]) || ['No headlines available for this selection'];
+                headlinesContainer.innerHTML = '';
+                items.forEach(text => {
+                    const el = document.createElement('div');
+                    el.className = 'py-1';
+                    el.textContent = text;
+                    headlinesContainer.appendChild(el);
+                });
+            }
+
+            function setActiveYear(year) {
+                activeYear = year;
+                yearTabs.forEach(tab => tab.classList.toggle('bg-[var(--color-brand-accent)]/15', tab.dataset.year === year));
+                renderHeadlines(activeSocial, activeYear);
+            }
+
+            socialTriggers.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    activeSocial = btn.dataset.social || 'linkedin';
+                    toggleModal(socialModal, true);
+                    setActiveYear(activeYear);
+                });
+            });
+
+            socialClose?.addEventListener('click', function () {
+                toggleModal(socialModal, false);
+            });
+
+            socialModal?.addEventListener('click', function (event) {
+                if (event.target === socialModal) toggleModal(socialModal, false);
+            });
+
+            yearTabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    setActiveYear(tab.dataset.year);
+                });
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    if (modal && !modal.classList.contains('hidden')) toggleModal(modal, false);
+                    if (socialModal && !socialModal.classList.contains('hidden')) toggleModal(socialModal, false);
+                }
+            });
+
+            // Initialize default state for social modal
+            renderHeadlines(activeSocial, activeYear);
+        });
+    </script>
+</body>
+</html>
