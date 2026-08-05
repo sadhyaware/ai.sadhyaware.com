@@ -1,135 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sadhyaware | Enterprise AI Solutions & S3-SEC Systems Incubator</title>
-    
+
     <!-- Enterprise Fallback CDN Engine (Ensures Tailwind loads globally across all networks) -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    
+
     <!-- Plus Jakarta Sans Premium Typography -->
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            animation: marquee 15s linear infinite;
+            /* Adjust duration as needed */
+        }
     </style>
+
+    <style type="text/tailwindcss">
+        @theme {
+            /* Synchronized Canva Core Brand Palette Variables */
+            --color-brand-primary: #0b0f19;
+            --color-brand-accent: #ff5757;
+            --color-brand-accent-light: #ff6f6f; /* Lighter shade for hover */
+            --color-brand-surface: #1e293b;
+            --color-brand-muted: #64748b;
+            --color-brand-text-light: #f1f5f9;
+            --color-brand-text-dark: #0f172a;
+            --color-brand-border: #334155;
+            
+            /* Custom Responsive Fluid Layout Extensions */
+            --font-display: 'Plus Jakarta Sans', sans-serif;
+            --breakpoint-xxl: 1600px;
+        }
+    </style>
+
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-slate-950">
+
+<body
+    class="bg-[var(--color-brand-primary)] text-[var(--color-brand-text-light)] min-h-screen flex flex-col justify-between selection:bg-[var(--color-brand-accent)] selection:text-[var(--color-brand-text-dark)]"
+    x-data="{ open: false }">
 
     <!-- Global Executive Header -->
-    <header class="border-b border-slate-900 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+    <header
+        class="border-b border-[var(--color-brand-border)] bg-[var(--color-brand-primary)]/80 backdrop-blur sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex flex-col">
-                <span class="text-xl font-extrabold tracking-wider text-emerald-400">SADHYAWARE</span>
-                <span class="text-[9px] uppercase tracking-[0.25em] text-slate-500 font-semibold">People • Process • Platforms</span>
+            <div class="flex items-center">
+                <!-- Sadhyaware Brand Logo -->
+                <img src="SSadhyaTheory-to-Praxis-PPP-TM-Transparent.png" alt="Sadhyaware Logo" class="h-21 mr-3">
+
             </div>
-            
+
             <!-- Desktop Navigation Menu -->
-            <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-wider text-slate-400">
-                <a href="#consulting" class="hover:text-emerald-400 transition">Consulting</a>
-                <a href="#ai-solutions" class="hover:text-emerald-400 transition">AI Platforms</a>
-                <a href="#s3-sec" class="hover:text-emerald-400 transition">S3-SEC Incubator</a>
+            <nav
+                class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-wider text-[var(--color-brand-muted)]">
+                <a href="#consulting" class="hover:text-[var(--color-brand-accent)] transition">Technology
+                    Consulting</a>
+                <a href="#ai-solutions" class="hover:text-[var(--color-brand-accent)] transition">AI Platforms</a>
+                <a href="#s3-sec" class="hover:text-[var(--color-brand-accent)] transition">Talent Incubator</a>
+                <a href="#s3-sec" class="hover:text-[var(--color-brand-accent)] transition">Products & Platforms</a>
             </nav>
 
             <!-- Mobile Hamburger Button -->
-            <div class="md:hidden">
-                <button id="menu-btn" class="text-slate-400 hover:text-emerald-400 focus:outline-none" aria-label="Toggle Menu">
+            <div class="md:hidden" x-data="{ open: false }">
+                <button @click="open = !open"
+                    class="text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] focus:outline-none"
+                    aria-label="Toggle Menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
 
             <div class="hidden md:block">
-                <a href="mailto:enterprisesolutions@obizconsulting.com" class="text-xs font-bold uppercase tracking-wider bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-2.5 rounded transition">
-                    Inquire Node
-                </a>
+                <div class="flex items-center space-x-4">
+                    <a href="mailto:enterprisesolutions@obizconsulting.com"
+                        class="text-xs font-bold uppercase tracking-wider bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-light)] text-[var(--color-brand-text-dark)] px-4 py-2.5 rounded transition">
+                        Inquire Node
+                    </a>
+                    <!-- Corporate Logo -->
+                    <img src="SadhyawareTechnologies-TM-Transparent.png" alt="Corporate Logo" class="h-14">
+                </div>
             </div>
         </div>
 
         <!-- Mobile Dynamic Navigation Drawer -->
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-950 border-b border-slate-900 px-6 py-4 space-y-3">
-            <a href="#consulting" class="block text-sm text-slate-400 hover:text-emerald-400 py-1 transition">Consulting</a>
-            <a href="#ai-solutions" class="block text-sm text-slate-400 hover:text-emerald-400 py-1 transition">AI Platforms</a>
-            <a href="#s3-sec" class="block text-sm text-slate-400 hover:text-emerald-400 py-1 transition">S3-SEC Incubator</a>
-            <a href="mailto:enterprisesolutions@obizconsulting.com" class="block text-sm font-bold text-emerald-400 pt-2 border-t border-slate-900">Inquire Node &rarr;</a>
+        <div x-show="open" @click.away="open = false"
+            class="md:hidden bg-[var(--color-brand-primary)] border-b border-[var(--color-brand-border)] px-6 py-4 space-y-3">
+            <a href="#consulting"
+                class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">Technology
+                Consulting</a>
+            <a href="#ai-solutions"
+                class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">AI
+                Platforms</a>
+            <a href="#s3-sec"
+                class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">Talent
+                Incubator</a>
+            <a href="#products"
+                class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">Products
+                & Platforms</a>
+            <a href="mailto:enterprisesolutions@obizconsulting.com"
+                class="block text-sm font-bold text-[var(--color-brand-accent)] pt-2 border-t border-[var(--color-brand-border)]">Inquire
+                Node &rarr;</a>
         </div>
     </header>
 
     <!-- Main Strategic Container -->
     <main class="flex-grow">
-        
-        <!-- HERO SECTION -->
-        <section class="max-w-7xl mx-auto px-6 pt-16 md:pt-24 pb-12 md:pb-16 text-center space-y-6">
-            <div class="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 px-3 py-1 rounded-full text-[10px] md:text-[11px] font-medium tracking-wide text-slate-400">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Decades of Global Enterprise Delivery across UK, USA, & Singapore</span>
+        <section class=" text-center space-y-6 ">
+            <div class="flex flex-col">
+                <span class="text-xl font-extrabold tracking-wider text-[var(--color-brand-accent)]">SADHYAWARE</span>
+                <span
+                    class="text-[9px] uppercase tracking-[0.25em] text-[var(--color-brand-muted)] font-semibold">People
+                    • Process • Platforms</span>
             </div>
-            <h1 class="text-3xl md:text-6xl font-black tracking-tight text-white max-w-4xl mx-auto leading-tight">
-                Driving Technology Transformation via Theory-to-Praxis™ Solutions
-            </h1>
-            <p class="text-slate-400 text-sm md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
-                Fusing deep worldwide domain expertise with active software pipelines. We optimize the core triad of modern technology-driven enterprise: <strong class="text-emerald-400 font-semibold">People, Processes, and Platforms</strong>.
+        </section>
+        <!-- Added relative and z-0 to establish a clean, local stacking context -->
+        <section class="max-w-7xl mx-auto px-6  pb-12 md:pb-16 text-center space-y-6 relative z-0">
+            <p class="text-[var(--color-brand-muted)] text-sm md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                We bring decades of Global Enterprise Delivery
+                across industries & sectors that need specialized solutions and technology deployments</strong>.
             </p>
-            <div class="pt-4 flex flex-col sm:flex-row justify-center items-center gap-3 text-xs font-semibold uppercase tracking-wider">
-                <a href="#s3-sec" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-5 py-3 rounded shadow-lg shadow-emerald-500/10 transition text-center">Launch Incubator</a>
-                <a href="#consulting" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 px-5 py-3 rounded transition text-center">View Domains</a>
+            <!-- Changed to z-0 and boosted opacity slightly for better contrast on dark themes -->
+            <div
+                class="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-10 select-none">
+                <img src="SadhyaSwanLogo-TransparentTM.png" alt="Watermark"
+                    class="w-1/2 h-auto max-w-[400px] object-contain">
+            </div>
+
+            <!-- Wrapped your text content inside a relative z-10 container so it floats over the watermark -->
+            <div class="relative z-10 space-y-6 flex flex-col items-center w-full">
+
+                <div x-data="{
+                    currentCountryIndex: 0,
+                    countryGroups: [
+                        'UK, USA',
+                        'Middle East, Singapore',
+                        'India'
+                    ],
+                    get currentCountries() {
+                        return this.countryGroups[this.currentCountryIndex];
+                    }
+                }"
+                    class="inline-flex items-center space-x-2 bg-[var(--color-brand-surface)] border border-[var(--color-brand-border)] px-3 py-1 rounded-full text-[10px] md:text-[11px] font-medium tracking-wide text-[var(--color-brand-muted)]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-accent)] animate-pulse"></span>
+                    <span>
+                    </span>
+                    <span x-text="currentCountries"></span>
+                    <!-- Small inline Swan logo -->
+                    <img src="SadhyaSwanLogo-TransparentTM.png" alt="Sadhyaware Swan Logo"
+                        class="h-34 w-34 object-contain">
+                    <button @click="currentCountryIndex = (currentCountryIndex + 1) % countryGroups.length"
+                        class="ml-2 p-1 rounded-full bg-[var(--color-brand-border)] hover:bg-[var(--color-brand-accent)] text-[var(--color-brand-text-light)] hover:text-[var(--color-brand-text-dark)] transition-colors focus:outline-none">
+                        &gt;
+                    </button>
+                </div>
+
+                <!-- Scrolling text -->
+                <div class="w-full overflow-hidden py-2">
+                    <h1
+                        class="marquee text-3l md:text-6l font-black tracking-tight text-[var(--color-brand-text-light)] leading-tight inline-block">
+                        Driving Technology Transformation via Theory-to-Praxis™ Solutions
+                    </h1>
+                </div>
+
+                <p
+                    class="text-[var(--color-brand-muted)] text-sm md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                    Fusing deep worldwide domain expertise with active software pipelines. We optimize the core triad of
+                    modern technology-driven enterprise: <strong
+                        class="text-[var(--color-brand-accent)] font-semibold">People, Processes, and
+                        Platforms</strong>.
+                </p>
+                <div
+                    class="pt-4 flex flex-col sm:flex-row justify-center items-center gap-3 text-xs font-semibold uppercase tracking-wider w-full">
+                    <a href="#s3-sec"
+                        class="w-full sm:w-auto bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-light)] text-[var(--color-brand-text-dark)] px-5 py-3 rounded shadow-lg shadow-[var(--color-brand-accent)]/10 transition text-center">Launch
+                        Incubator</a>
+                    <a href="#consulting"
+                        class="w-full sm:w-auto bg-[var(--color-brand-surface)] hover:bg-[var(--color-brand-border)] text-[var(--color-brand-text-light)] border border-[var(--color-brand-border)] px-5 py-3 rounded transition text-center">View
+                        Domains</a>
+                </div>
+
             </div>
         </section>
 
-        <hr class="border-slate-900 max-w-7xl mx-auto my-4">
+        <hr class="border-[var(--color-brand-border)] max-w-7xl mx-auto my-4">
 
         <!-- SECTION 1: GLOBAL CONSULTING & 6 INDUSTRY DOMAINS -->
-        <section id="consulting" class="max-w-7xl mx-auto px-6 py-12 md:py-16 space-y-12">
+        <section id="consulting" class="max-w-7xl mx-auto px-6 py-12 md:py-16 space-y-12 relative overflow-hidden">
             <div class="max-w-3xl">
-                <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">01 / Corporate Advisory</h2>
-                <h3 class="text-xl md:text-3xl font-bold tracking-tight text-white mt-2">Targeted Industry Domains & Systems Focus</h3>
-                <p class="text-slate-400 text-xs md:text-sm mt-3 font-light leading-relaxed">
-                    Building on a tenured track record scaling enterprise architecture globally between 1998 and 2008 across the world's primary economic hubs—including complex system deliveries in Singapore, the United States, and the United Kingdom—we offer hardened consulting structures across six major digital frontiers:
+                <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-brand-accent)]">01 / Corporate
+                    Advisory</h2>
+                <h3 class="text-xl md:text-3xl font-bold tracking-tight text-[var(--color-brand-text-light)] mt-2">
+                    Targeted Industry Domains & Systems Focus</h3>
+                <p class="text-[var(--color-brand-muted)] text-xs md:text-sm mt-3 font-light leading-relaxed">
+                    Building on a tenured track record scaling enterprise architecture globally between 1998 and 2008
+                    across the world's primary economic hubs—including complex system deliveries in Singapore, the
+                    United States, and the United Kingdom—we offer hardened consulting structures across six major
+                    digital frontiers:
                 </p>
             </div>
 
             <!-- Responsive Layout Grid: 1 Column on Mobile, 2 on Tablet, 3 on Desktop -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-slate-900/30 p-6 rounded-xl border border-slate-900 space-y-2">
-                    <div class="text-emerald-400 font-mono text-[10px]">[ DOMAIN_01 ]</div>
-                    <h4 class="text-base font-bold text-slate-200">Retail Ecosystems</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed font-light">Optimizing inventory allocation, omnichannel transaction fabrics, and real-time point-of-sale stream analytics networks.</p>
+                <div
+                    class="bg-[var(--color-brand-surface)]/30 p-6 rounded-xl border border-[var(--color-brand-border)] space-y-2">
+                    <div class="text-[var(--color-brand-accent)] font-mono text-[10px]"></div>
+                    <h4 class="text-base font-bold text-[var(--color-brand-text-light)]">Retail Ecosystems</h4>
+                    <p class="text-xs text-[var(--color-brand-muted)] leading-relaxed font-light">Optimizing inventory
+                        allocation, omnichannel transaction fabrics, and real-time point-of-sale stream analytics
+                        networks.</p>
                 </div>
-                <div class="bg-slate-900/30 p-6 rounded-xl border border-slate-900 space-y-2">
-                    <div class="text-emerald-400 font-mono text-[10px]">[ DOMAIN_02 ]</div>
-                    <h4 class="text-base font-bold text-slate-200">Banking & Insurance</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed font-light">Hardening transaction systems, designing secure modern core financial integrations, and automating underwriting workflows.</p>
+                <div
+                    class="bg-[var(--color-brand-surface)]/30 p-6 rounded-xl border border-[var(--color-brand-border)] space-y-2">
+                    <div class="text-[var(--color-brand-accent)] font-mono text-[10px]"></div>
+                    <h4 class="text-base font-bold text-[var(--color-brand-text-light)]">Banking & Insurance</h4>
+                    <p class="text-xs text-[var(--color-brand-muted)] leading-relaxed font-light">Hardening transaction
+                        systems, designing secure modern core financial integrations, and automating underwriting
+                        workflows.</p>
                 </div>
-                <div class="bg-slate-900/30 p-6 rounded-xl border border-slate-900 space-y-2">
-                    <div class="text-emerald-400 font-mono text-[10px]">[ DOMAIN_03 ]</div>
-                    <h4 class="text-base font-bold text-slate-200">Corporate Finance</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed font-light">Deploying complex quantitative analytics, automated regulatory reporting tools, and structural operational oversight engines.</p>
+                <div
+                    class="bg-[var(--color-brand-surface)]/30 p-6 rounded-xl border border-[var(--color-brand-border)] space-y-2">
+                    <div class="text-[var(--color-brand-accent)] font-mono text-[10px]"></div>
+                    <h4 class="text-base font-bold text-[var(--color-brand-text-light)]">Corporate Finance</h4>
+                    <p class="text-xs text-[var(--color-brand-muted)] leading-relaxed font-light">Deploying complex
+                        quantitative analytics, automated regulatory reporting tools, and structural operational
+                        oversight engines.</p>
                 </div>
-                <div class="bg-slate-900/30 p-6 rounded-xl border border-slate-900 space-y-2">
-                    <div class="text-emerald-400 font-mono text-[10px]">[ DOMAIN_04 ]</div>
-                    <h4 class="text-base font-bold text-slate-200">Supply Chain Logistics</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed font-light">Architecting automated multi-node tracking networks, systemic freight optimization, and predictive distribution patterns.</p>
+                <div
+                    class="bg-[var(--color-brand-surface)]/30 p-6 rounded-xl border border-[var(--color-brand-border)] space-y-2">
+                    <div class="text-[var(--color-brand-accent)] font-mono text-[10px]"></div>
+                    <h4 class="text-base font-bold text-[var(--color-brand-text-light)]">Supply Chain Logistics</h4>
+                    <p class="text-xs text-[var(--color-brand-muted)] leading-relaxed font-light">Architecting automated
+                        multi-node tracking networks, systemic freight optimization, and predictive distribution
+                        patterns.</p>
                 </div>
-                <div class="bg-slate-900/30 p-6 rounded-xl border border-slate-900 space-y-2">
-                    <div class="text-emerald-400 font-mono text-[10px]">[ DOMAIN_05 ]</div>
-                    <h4 class="text-base font-bold text-slate-200">Gen AI & Deep Learning</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed font-light">Integrating secure local Large Language Models (LLMs), structural NLP systems, and proprietary fine-tuning codebeds.</p>
+                <div
+                    class="bg-[var(--color-brand-surface)]/30 p-6 rounded-xl border border-[var(--color-brand-border)] space-y-2">
+                    <div class="text-[var(--color-brand-accent)] font-mono text-[10px]"></div>
+                    <h4 class="text-base font-bold text-[var(--color-brand-text-light)]">Gen AI & Deep Learning</h4>
+                    <p class="text-xs text-[var(--color-brand-muted)] leading-relaxed font-light">Integrating secure
+                        local Large Language Models (LLMs), structural NLP systems, and proprietary fine-tuning
+                        codebeds.</p>
                 </div>
-                <div class="bg-slate-900/30 p-6 rounded-xl border border-slate-900 space-y-2">
-                    <div class="text-emerald-400 font-mono text-[10px]">[ DOMAIN_06 ]</div>
-                    <h4 class="text-base font-bold text-slate-200">Industrial IoT Pipelines</h4>
-                    <p class="text-xs text-slate-400 leading-relaxed font-light">Designing edge sensor processing networks, secure hardware-to-cloud streams, and predictive anomaly models.</p>
+                <div
+                    class="bg-[var(--color-brand-surface)]/30 p-6 rounded-xl border border-[var(--color-brand-border)] space-y-2">
+                    <div class="text-[var(--color-brand-accent)] font-mono text-[10px]"> </div>
+                    <h4 class="text-base font-bold text-[var(--color-brand-text-light)]">Industrial IoT Pipelines</h4>
+                    <p class="text-xs text-[var(--color-brand-muted)] leading-relaxed font-light">Designing edge sensor
+                        processing networks, secure hardware-to-cloud streams, and predictive anomaly models.</p>
+                </div>
+                <div
+                    class="bg-[var(--color-brand-surface)]/30 p-6 rounded-xl border border-[var(--color-brand-border)] space-y-2">
+                    <div class="text-[var(--color-brand-accent)] font-mono text-[10px]"></div>
+                    <h4 class="text-base font-bold text-[var(--color-brand-text-light)]">FinTech & Open Banking</h4>
+                    <p class="text-xs text-[var(--color-brand-muted)] leading-relaxed font-light">Integrating secure
+                        local Large Language Models (LLMs), structural NLP systems, and proprietary fine-tuning
+                        codebeds.</p>
+                </div>
+                <div
+                    class="bg-[var(--color-brand-surface)]/30 p-6 rounded-xl border border-[var(--color-brand-border)] space-y-2">
+                    <div class="text-[var(--color-brand-accent)] font-mono text-[10px]"> </div>
+                    <h4 class="text-base font-bold text-[var(--color-brand-text-light)]">Global Sustainability</h4>
+                    <p class="text-xs text-[var(--color-brand-muted)] leading-relaxed font-light">Designing edge sensor
+                        processing networks, secure hardware-to-cloud streams, and predictive anomaly models.</p>
+                </div>
+                <div
+                    class="bg-[var(--color-brand-surface)]/30 p-6 rounded-xl border border-[var(--color-brand-border)] space-y-2">
+                    <div class="text-[var(--color-brand-accent)] font-mono text-[10px]"> </div>
+                    <h4 class="text-base font-bold text-[var(--color-brand-text-light)]">Sovereign AI Models</h4>
+                    <p class="text-xs text-[var(--color-brand-muted)] leading-relaxed font-light">Designing edge sensor
+                        processing networks, secure hardware-to-cloud streams, and predictive anomaly models.</p>
                 </div>
             </div>
         </section>
 
-        <hr class="border-slate-900 max-w-7xl mx-auto my-4">
+        <hr class="border-[var(--color-brand-border)] max-w-7xl mx-auto my-4">
 
         <!-- SECTION 2: AI / ML ACTIVE PROJECTS -->
         <section id="ai-solutions" class="max-w-7xl mx-auto px-6 py-12 md:py-16 space-y-12">
             <div class="max-w-3xl">
-                <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">02 / Automated Platforms</h2>
-
+                <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-brand-accent)]">02 / Automated
+                    Platforms</h2>
