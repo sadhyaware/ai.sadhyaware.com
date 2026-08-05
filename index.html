@@ -75,13 +75,63 @@
 
 
             <!-- Desktop Navigation Menu -->
-            <nav
-                class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-wider text-[var(--color-brand-muted)]">
-                <a href="#consulting" class="hover:text-[var(--color-brand-accent)] transition">Technology
-                    Consulting</a>
-                <a href="#ai-solutions" class="hover:text-[var(--color-brand-accent)] transition">AI Services</a>
-                <a href="#s3-sec" class="hover:text-[var(--color-brand-accent)] transition">Talent Incubator</a>
-                <a href="#s3-sec" class="hover:text-[var(--color-brand-accent)] transition">Products & Platforms</a>
+            <nav class="hidden md:flex items-center space-x-6 text-xs font-semibold uppercase tracking-wider text-[var(--color-brand-muted)]">
+                <div class="relative group">
+                    <button tabindex="0" class="hover:text-[var(--color-brand-accent)] transition" aria-haspopup="true">Technology Consulting</button>
+                    <div tabindex="-1" class="absolute left-0 mt-2 w-56 bg-[var(--color-brand-primary)] border border-[var(--color-brand-border)] rounded-md py-2 invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100 group-focus-within:pointer-events-auto transition transform origin-top-left">
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Overview</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Capabilities</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Engagement Models</a>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <button tabindex="0" class="hover:text-[var(--color-brand-accent)] transition" aria-haspopup="true">AI Services</button>
+                    <div tabindex="-1" class="absolute left-0 mt-2 w-48 bg-[var(--color-brand-primary)] border border-[var(--color-brand-border)] rounded-md py-2 invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100 group-focus-within:pointer-events-auto transition transform origin-top-left">
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Overview</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Products</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Use Cases</a>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <button tabindex="0" class="hover:text-[var(--color-brand-accent)] transition" aria-haspopup="true">Talent Incubator</button>
+                    <div tabindex="-1" class="absolute left-0 mt-2 w-48 bg-[var(--color-brand-primary)] border border-[var(--color-brand-border)] rounded-md py-2 invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100 group-focus-within:pointer-events-auto transition transform origin-top-left">
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Programs</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Apply</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Success Stories</a>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <button tabindex="0" class="hover:text-[var(--color-brand-accent)] transition" aria-haspopup="true">Products & Services</button>
+                    <div tabindex="-1" class="absolute left-0 mt-2 w-56 bg-[var(--color-brand-primary)] border border-[var(--color-brand-border)] rounded-md py-2 invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100 group-focus-within:pointer-events-auto transition transform origin-top-left">
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Platforms</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Integrations</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Professional Services</a>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <button tabindex="0" class="hover:text-[var(--color-brand-accent)] transition" aria-haspopup="true">About Us & Social Handles</button>
+                    <div tabindex="-1" class="absolute left-0 mt-2 w-56 bg-[var(--color-brand-primary)] border border-[var(--color-brand-border)] rounded-md py-2 invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100 group-focus-within:pointer-events-auto transition transform origin-top-left">
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">YouTube</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Twitter</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Facebook</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Instagram</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">LinkedIn</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Contact Us</a>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <button tabindex="0" class="hover:text-[var(--color-brand-accent)] transition" aria-haspopup="true">Login</button>
+                    <div tabindex="-1" class="absolute left-0 mt-2 w-44 bg-[var(--color-brand-primary)] border border-[var(--color-brand-border)] rounded-md py-2 invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100 group-focus-within:pointer-events-auto transition transform origin-top-left">
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Customers</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Partners</a>
+                        <a href="#consulting" class="block px-4 py-2 text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)]">Employees</a>
+                    </div>
+                </div>
             </nav>
 
             <!-- Mobile Hamburger Button -->
@@ -119,6 +169,9 @@
                     <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Engagement Models</a>
                 </div>
             </div>
+            <div class="pt-2">
+                <button type="button" class="launch-incubator-open w-full text-left bg-[var(--color-brand-accent)] text-[var(--color-brand-text-dark)] px-4 py-2 rounded">Launch Incubator</button>
+            </div>
             <div>
                 <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">AI Services</a>
                 <div class="pl-4">
@@ -151,6 +204,15 @@
                     <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Facebook</a>
                     <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Instagram</a>
                     <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">LinkedIn</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Contact Us</a>
+                </div>
+            </div>
+            <div>
+                <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">Login</a>
+                <div class="pl-4">
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Customers</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Partners</a>
+                    <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] py-1">Employees</a>
                 </div>
             </div>
 
@@ -228,8 +290,7 @@
                 </p>
                 <div
                     class="pt-4 flex flex-col sm:flex-row justify-center items-center gap-3 text-xs font-semibold uppercase tracking-wider w-full">
-                    <button id="launch-incubator-button"
-                        class="w-full sm:w-auto bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-light)] text-[var(--color-brand-text-dark)] px-5 py-3 rounded shadow-lg shadow-[var(--color-brand-accent)]/10 transition text-center">
+                    <button id="launch-incubator-button" class="launch-incubator-open w-full sm:w-auto bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-light)] text-[var(--color-brand-text-dark)] px-5 py-3 rounded shadow-lg shadow-[var(--color-brand-accent)]/10 transition text-center">
                         Launch Incubator
                     </button>
                     <a href="#consulting"
@@ -469,7 +530,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Incubator modal + tabs
-            const openButton = document.getElementById('launch-incubator-button');
+            const openButtons = document.querySelectorAll('.launch-incubator-open');
             const modal = document.getElementById('launch-incubator-modal');
             const closeButton = document.getElementById('launch-incubator-close');
             const tabButtons = document.querySelectorAll('#launch-incubator-modal .tab-button');
@@ -492,10 +553,10 @@
                 });
             }
 
-            openButton?.addEventListener('click', function () {
+            openButtons.forEach(btn => btn.addEventListener('click', function () {
                 toggleModal(modal, true);
                 setActiveTab('framework');
-            });
+            }));
 
             closeButton?.addEventListener('click', function () {
                 toggleModal(modal, false);
