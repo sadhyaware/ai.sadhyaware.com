@@ -95,6 +95,36 @@
             transform: translateX(-50%) translateY(-8px);
         }
 
+        #mobile-nav-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            background: rgba(7, 11, 29, 0.45);
+            backdrop-filter: blur(4px);
+            display: none;
+        }
+
+        #mobile-nav-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: min(52vw, 420px);
+            max-width: 420px;
+            background: rgba(11, 15, 25, 0.98);
+            border-left: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: -12px 0 32px rgba(0, 0, 0, 0.35);
+            transform: translateX(100%);
+            transition: transform 0.24s ease;
+            z-index: 45;
+            overflow-y: auto;
+            padding: 1.25rem 1.5rem;
+        }
+
+        #mobile-nav-drawer.open {
+            transform: translateX(0);
+        }
+
         [x-cloak] {
             display: none !important;
         }
@@ -190,8 +220,8 @@
                 </div>
             </nav>
 
-            <!-- Mobile Hamburger Button -->
-            <div class="md:hidden">
+            <!-- Mobile Hamburger Button + Cart Icon -->
+            <div class="md:hidden flex items-center justify-between w-full">
                 <button id="mobile-nav-toggle" aria-expanded="false"
                     class="text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] focus:outline-none"
                     aria-label="Toggle Menu">
@@ -199,6 +229,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
+                </button>
+                <button id="mobile-cart-button" type="button"
+                    class="text-xs font-bold uppercase tracking-wider bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-light)] text-[var(--color-brand-text-dark)] px-3 py-2 rounded transition">
+                    Cart (0)
                 </button>
             </div>
 
@@ -215,7 +249,9 @@
         </div>
 
         <!-- Mobile Dynamic Navigation Drawer -->
-        <div id="mobile-nav-drawer" class="hidden md:hidden bg-[var(--color-brand-primary)] border-b border-[var(--color-brand-border)] px-6 py-4 space-y-3"
+        <div id="mobile-nav-overlay" class="hidden"></div>
+
+        <div id="mobile-nav-drawer" class="hidden md:hidden bg-[var(--color-brand-primary)] border-l border-[var(--color-brand-border)] px-6 py-4 space-y-3"
             aria-hidden="true">
             <div>
                 <a href="#consulting" class="block text-sm text-[var(--color-brand-muted)] hover:text-[var(--color-brand-accent)] py-1 transition">Technology Consulting</a>
@@ -272,9 +308,19 @@
                 </div>
             </div>
 
-            <a href="mailto:enterprisesolutions@obizconsulting.com"
-                class="block text-sm font-bold text-[var(--color-brand-accent)] pt-2 border-t border-[var(--color-brand-border)]">Inquire
-                Node &rarr;</a>
+            <div class="mt-4 border-t border-[var(--color-brand-border)] pt-4">
+                <div class="flex items-center justify-between gap-3">
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-brand-accent)]">Enquiry Cart</p>
+                        <p id="mobile-cart-summary" class="text-sm text-[var(--color-brand-text-light)]">No items selected yet.</p>
+                    </div>
+                    <button id="mobile-cart-checkout" type="button"
+                        class="text-[var(--color-brand-text-dark)] bg-[var(--color-brand-accent)] px-3 py-2 rounded text-xs font-semibold uppercase tracking-wider transition hover:bg-[var(--color-brand-accent-light)]">
+                        Checkout
+                    </button>
+                </div>
+                <div id="mobile-cart-items" class="mt-3 space-y-2 text-sm text-[var(--color-brand-muted)]"></div>
+            </div>
         </div>
     </header>
 
@@ -473,6 +519,7 @@
             </label>
             <div class="flex flex-col sm:flex-row gap-3 pt-2">
                 <button type="submit" class="w-full sm:w-auto rounded-xl bg-[var(--color-brand-accent)] px-5 py-3 text-sm font-semibold text-[var(--color-brand-text-dark)] transition hover:bg-[var(--color-brand-accent-light)]">Send Message</button>
+                <button id="email-checkout-button" type="button" class="w-full sm:w-auto rounded-xl border border-[var(--color-brand-accent)] bg-[var(--color-brand-accent)]/10 px-5 py-3 text-sm font-semibold text-[var(--color-brand-accent)] transition hover:bg-[var(--color-brand-accent)]/20">Compose Email Checkout</button>
                 <button type="reset" class="w-full sm:w-auto rounded-xl border border-[var(--color-brand-border)] bg-transparent px-5 py-3 text-sm font-semibold text-[var(--color-brand-text-light)] transition hover:border-[var(--color-brand-accent)]">Reset</button>
             </div>
         </form>
@@ -785,30 +832,88 @@
                 });
             });
 
-            // Mobile drawer toggle
+            // Mobile drawer + overlay toggle
             const mobileToggle = document.getElementById('mobile-nav-toggle');
             const mobileDrawer = document.getElementById('mobile-nav-drawer');
+            const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+            const mobileCartButton = document.getElementById('mobile-cart-button');
+            const mobileCartCheckout = document.getElementById('mobile-cart-checkout');
+            const mobileCartItems = document.getElementById('mobile-cart-items');
+            const mobileCartSummary = document.getElementById('mobile-cart-summary');
             let mobileOpen = false;
 
             function setMobileDrawerState(open) {
                 mobileOpen = open;
                 if (mobileDrawer) {
-                    mobileDrawer.classList.toggle('hidden', !open);
-                    mobileDrawer.style.display = open ? 'block' : 'none';
+                    mobileDrawer.classList.toggle('open', open);
                     mobileDrawer.setAttribute('aria-hidden', (!open).toString());
+                }
+                if (mobileNavOverlay) {
+                    mobileNavOverlay.classList.toggle('hidden', !open);
+                    mobileNavOverlay.setAttribute('aria-hidden', (!open).toString());
+                    mobileNavOverlay.style.display = open ? 'block' : 'none';
                 }
                 if (mobileToggle) {
                     mobileToggle.setAttribute('aria-expanded', open.toString());
                 }
+                document.body.classList.toggle('overflow-hidden', open);
+            }
+
+            function updateCartButtons() {
+                const cartButtons = document.querySelectorAll('#cart-button, #mobile-cart-button');
+                cartButtons.forEach(button => {
+                    button.textContent = `Cart (${cartItems.length})`;
+                });
+            }
+
+            function updateMobileCartSummary() {
+                if (!mobileCartSummary || !mobileCartItems) return;
+                mobileCartSummary.textContent = cartItems.length
+                    ? `${cartItems.length} item${cartItems.length === 1 ? '' : 's'} selected.`
+                    : 'No items selected yet.';
+                mobileCartItems.innerHTML = '';
+                cartItems.forEach(item => {
+                    const line = document.createElement('div');
+                    line.className = 'rounded-2xl border border-[var(--color-brand-border)] bg-[var(--color-brand-surface)] px-3 py-2';
+                    line.textContent = item;
+                    mobileCartItems.appendChild(line);
+                });
+            }
+
+            function buildCheckoutEmail() {
+                const to = 'enterprisesolutions@obizconsulting.com';
+                const subject = encodeURIComponent('Sadhyaware Service Enquiry Checkout');
+                const bodyItems = cartItems.length
+                    ? cartItems.map((item, index) => `${index + 1}. ${item}`).join('\n')
+                    : '- [Please add services from the enquiry cart]';
+                const body = encodeURIComponent(`Hello Sadhyaware Team,\n\nI would like to enquire about the following services:\n${bodyItems}\n\nPlease share next steps and a proposal.\n\nThank you.`);
+                return `mailto:${to}?subject=${subject}&body=${body}`;
+            }
+
+            function composeCheckoutEmail() {
+                window.location.href = buildCheckoutEmail();
             }
 
             mobileToggle?.addEventListener('click', function () {
                 setMobileDrawerState(!mobileOpen);
             });
 
+            mobileCartButton?.addEventListener('click', function () {
+                setMobileDrawerState(true);
+            });
+
+            mobileCartCheckout?.addEventListener('click', function () {
+                composeCheckoutEmail();
+            });
+
+            mobileNavOverlay?.addEventListener('click', function () {
+                setMobileDrawerState(false);
+            });
+
             document.addEventListener('click', function (event) {
                 if (!mobileOpen || !mobileDrawer || !mobileToggle) return;
-                if (!mobileDrawer.contains(event.target) && !mobileToggle.contains(event.target) && window.innerWidth < 768) {
+                const target = event.target;
+                if (!mobileDrawer.contains(target) && !mobileToggle.contains(target) && !(mobileCartButton && mobileCartButton.contains(target)) && window.innerWidth < 768) {
                     setMobileDrawerState(false);
                 }
             });
@@ -929,6 +1034,8 @@
                 if (cartButton) {
                     cartButton.textContent = `Cart (${cartItems.length})`;
                 }
+                updateCartButtons();
+                updateMobileCartSummary();
             }
 
             function showToast(message) {
@@ -964,6 +1071,8 @@
             cartButton?.addEventListener('click', function () {
                 openContactModal();
             });
+            const emailCheckoutButton = document.getElementById('email-checkout-button');
+            emailCheckoutButton?.addEventListener('click', composeCheckoutEmail);
 
             contactClose?.addEventListener('click', closeContactModal);
             contactModal?.addEventListener('click', function (event) {
